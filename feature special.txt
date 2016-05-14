@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-I am master, and this doomed to be conficted!
-=======
-wolegecao,this time must be conflicted
->>>>>>> feature2
