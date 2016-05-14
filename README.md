@@ -9,16 +9,16 @@ UESTCthesis是电子科技大学毕业论文官方发布的LaTeX模板。同时�
 
 本模板使用LPPL协议发布。
 
-模板的**使用说明**请看Wiki页面：  
+模板的**使用说明**请看Wiki页面：
 [https://github.com/shifujun/UESTCthesis/wiki](https://github.com/shifujun/UESTCthesis/wiki)
 
-模板的已知但未能修复的BUG见issue页面：  
+模板的已知但未能修复的BUG见issue页面：
 [https://github.com/shifujun/UESTCthesis/issues](https://github.com/shifujun/UESTCthesis/issues)
 
 如果有需要反馈的问题可以开issue在这里反馈，我能及时收到邮件。
 
-如果希望用QQ即时交流可加QQ群：   
-![成电LaTeX技术交流（71480604）](https://github.com/shifujun/UESTCthesis/wiki/images/QQGroupLogo.jpg) 成电LaTeX技术交流（71480604）验证信息请说明身份，不要空置。  
+如果希望用QQ即时交流可加QQ群：
+![成电LaTeX技术交流（71480604）](https://github.com/shifujun/UESTCthesis/wiki/images/QQGroupLogo.jpg) 成电LaTeX技术交流（71480604）验证信息请说明身份，不要空置。
 加群连接：[http://url.cn/S1QIdM](http://url.cn/S1QIdM)
 
 # 更新日志 #
@@ -100,3 +100,4 @@ UESTCthesis是电子科技大学毕业论文官方发布的LaTeX模板。同时�
 
 ## 源代码更新日志 ##
 模板使用dtx编写方式，在source目录中可以编译出模板的源代码文档。其中也有更新日志，包括一些程序内部方面的改动日志。
+
