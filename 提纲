@@ -1,0 +1,31 @@
+Abstract
+
+1. Introduction引言
+1.1 Co-Clustering介绍、现状、需求
+1.2 相关review
+1.2 我的工作的思路(要解决的问题 + 怎么解决的)
+1.3 Contribute(我的算法成果分析)
+1.4 章节简介
+
+2. Related Word
+2.1 co-clustering
+2.2 Sync
+
+3. Co-Sync算法介绍
+3.1 Co-Sync
+3.2 Pattern Search
+3.3 NMF
+
+4. 算法实现、评估
+4.1 数据集
+4.2 评价指标
+4.3
+
+5. 结论，综合评价
+5.1 总结
+5.2 未来展望，接下来做的工作
+
+参考文献
+致谢
+附录：程序、可能的表格
+
