@@ -33,8 +33,8 @@
 
 \begin{itemize}
     \item \textbf{~~分类(Classification)} 分类算法的目的是为特定变量确定类别或者标签，比如根据近年来我国的经济发展情况来确定房价是涨还是跌。一般来说，分类首先用历史数据作为训练集，学习出目标函数，然后用学到的目标函数来预测新来的未知数据点的类别。常见的分类算法有\emph{kNN}\cite{peterson2009k},\emph{决策树}\cite{quinlan1986induction},\emph{支持向量机}\cite{cortes1995support}等。
-    \item \textbf{~~聚类（Clustering）} 聚类算法的目的是将数据分为许多类，使得相似的数据分在同一类中，不相似的数据分布在不同的类中，比如菜农可以根据一批辣椒的形状、辛辣程度将其聚拢成不同类别销售。常见的聚类方法有\emph{k-means}\cite{hartigan1979algorithm}, \emph{spectral clustering}\cite{ng2002spectral} 等方法。
-    \item \textbf{~~关联规则分析（Analysis of Association Rule）} 关联规则分析的目的是从数据中发现经常出现的模式，一个经典的例子是人们从超市的大量销售记录中发现买尿布的人也常常买啤酒。经典的关联规则分析方法有：\emph{Apriori}\cite{agrawal1994fast}, \emph{DBSCAN}\cite{ester1996density}和\emph{FP-growth}\cite{han2000mining}等。
+    \item \textbf{~~聚类（Clustering）} 聚类算法的目的是将数据分为许多类，使得相似的数据分在同一类中，不相似的数据分布在不同的类中，比如菜农可以根据一批辣椒的形状、辛辣程度将其聚拢成不同类别销售。常见的聚类方法有\emph{k-means}\cite{hartigan1979algorithm}, \emph{spectral clustering}\cite{ng2002spectral}和\emph{DBSCAN}\cite{ester1996density}等方法。
+    \item \textbf{~~关联规则分析（Analysis of Association Rule）} 关联规则分析的目的是从数据中发现经常出现的模式，一个经典的例子是人们从超市的大量销售记录中发现买尿布的人也常常买啤酒。经典的关联规则分析方法有：\emph{Apriori}\cite{agrawal1994fast}和\emph{FP-growth}\cite{han2000mining}等。
     \item \textbf{~~奇异点检测（Animation Detection）} 奇异点检测的目的是发现数据集中存在的奇异点，即与大多数点不相似的少数数据点，比如邮件代理公司会根据正常邮件与垃圾邮件的特征对比，来为用户标记垃圾邮件。通常来说大多数聚类算法都可以作为奇异点检测算法。
 \end{itemize}
 
@@ -78,7 +78,7 @@
 \begin{enumerate}
   \item \textbf{~~全新的视角}：\CoSync{}找寻联合簇的方式非常规的启发式搜索，而是利用全新的视角：\emph{动态模拟（dynamic simulation）}。该方法建立在两个聚类空间的加权交互上，使得隐藏在矩阵中的、能体现相关生物学模式的联合簇能够直观地自动浮现出来。
   \item \textbf{~~抓住内在自然结构}：\CoSync{}方法对数据集的结构和联合簇的形状没有假设限制，其工作原理使得找寻到的联合簇是严格的数据本身内在的结构体现。
-  \item \textbf{~~克服了高维诅咒}：对于高维矩阵，\CoSync{}结合了非负矩阵分解（\emph{NMF}）的相关技术，将其分解为两个低维矩阵，同时保留了主要信息。此举使得高维矩阵的计算原本极高的时间复杂度降低了不止一个量级，从而让\CoSync{}可以对大规模基因表达问题求解。
+  \item \textbf{~~克服了高维诅咒}：对于高维矩阵，\CoSync{}结合了非负矩阵分解（\emph{NMF}）的相关技术，将其分解为两个低维矩阵，同时保留了主要信息。此举使得高维矩阵的计算原本极高的时间复杂度降低了不止一个量级，从而让\CoSync{}可以对大规模真实数据集问题求解。
 \end{enumerate}
 
 \section{本文的结构组织与章节安排}
@@ -86,7 +86,7 @@
 
 \begin{itemize}
   \item[-] 第\ref{chapter:rw}章为相关工作，其将对目前所有的双边聚类算法做一个简要的综述，根据其定义的联合簇结构和算法工作原理将其分成几个分支分别介绍，并指出它们算法的内在缺陷。同时还将介绍本文动态思想的来源：\Sync{}算法的思想和工作原理。
-  \item[-] 第\ref{chapter:main}章为本文的主体方法，提出了\CoSync{}算法，之后详细地推导出找寻联合簇，发现结果矩阵中的模式（Pattern）的启发式方法。最后将非负矩阵分解的方法结合到\CoSync{}中，得到算法的全貌。
+  \item[-] 第\ref{chapter:main}章为本文的主体方法，分布提出了\CoSync{}算法中包含的模型：加权双边交互模型、最大同值子矩阵搜索算法和非负矩阵分解算法。
   \item[-] 第\ref{chapter:experiment}章为本文的实验验证部分，首先指定算法工作的人工数据集和真实数据集，之后定义衡量算法好坏的评价指标，接着用一系列的实验来说明\CoSync{}算法的效果，并对每个实验结果进行说明。
   \item[-] 第\ref{chapter:conclusion}章为总结和展望部分，总结了这篇文章的主要工作，给出客观的评价。最后给出了本工作没有涉及的部分和之后可以继续深入做下去的一些工作。
 

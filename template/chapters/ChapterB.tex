@@ -14,7 +14,7 @@
       b_{11} & b_{12} & \ldots & b_{1|J|} \\
       b_{21} & b_{22} & \ldots & b_{2|J|} \\
       \vdots & \vdots & \ddots & \vdots \\
-      b_{|I|1} & b_{|I|2} & \ldots & b_{I|J|} \\
+      b_{|I|1} & b_{|I|2} & \ldots & b_{|I||J|} \\
     \end{array}
   \right)
 \end{equation*}
@@ -65,26 +65,26 @@ Tanay等人\cite{tanay2002discovering}证明了双边聚类问题为NP难问题�
 对于任意NP问题的求解，暴力搜索的的方法是不可取的，否则时间复杂度会随着数据规模的增加而指数或者更快地上升。通常这类问题都会用启发式的搜索来求解，必须有一定的评价指标（evaluation measure）来引导搜索的方向。在双边聚类问题里，不同的启发式算法或基于不同的评价指标作为目标函数，或采取不同的优化方案作为搜索策略。本文列出了几
 种主要的算法类别，并不代表所有的双边聚类算法：
 
-\subsubsection*{1. 贪心迭代式搜索算法}
+\subsubsection*{(1) 贪心迭代式搜索算法}
 贪心算法的策略即用迭代的方式向最优解逼近，其中每次迭代都取本次的最优解，算法最终在有限时间内结束。最能体现这种思想的就是“同时聚类”思想创始人Hartigan\cite{hartigan1972direct}提出的\emph{直接搜索法（Direct Clustering）}，其工作原理就是用分治法，将原始矩阵不断分为子矩阵，最终收敛得到联合簇。之后Cheng和Church\cite{cheng2000biclustering}提出了矩阵的最小平方残差（Mean Squared Residue）作为指标搜索，之后Mukhopadhyay等人\cite{mukhopadhyay2009novel}改进\emph{MSR} 为\emph{SMSR(Scaling MSR)}后又进行更为深入的研究。Yip等人\cite{yip2004harp}提出了\emph{HARP}算法，利用\emph{RI(relevance idnex)}因子对矩阵进行自动的，层次性的搜索。除了普通的贪心迭代式搜索，还有在目标函数中加了随机扰动项的随机迭代式搜索，如Yang等人\cite{yang2005improved}提出的\emph{FLOC}算法等。相关算法还有很多，不再列举。
 
-\subsubsection*{2. 自然仿生式搜索算法}
+\subsubsection*{(2) 自然仿生式搜索算法}
 自然仿生式的方法的思想都是受一些自然规律启发而发明的，在双边聚类问题中，Bryan等人\cite{bryan2006application}基于模拟退火\cite{das2005quantum}的优化方式进行搜索，Liu等人\cite{liu2009biclustering}基于2011年最火的粒子群优化算法\cite{kennedy2011particle}，用模拟鸟群和鱼群集群觅食的方式来指导搜索策略。Coelho等人\cite{coelho2009multi}提出了基于人工免疫系统\cite{de2002artificial}的算法，利用记忆性来进行搜索。除此之外还有一些基于进化计算的算法，不再列举。
 
-\subsubsection*{3. 基于传统聚类扩展的算法}
+\subsubsection*{(3) 基于传统聚类扩展的算法}
 这一类算法没有从新的角度入手，仍然是从传统聚类的方法，对矩阵的行空间空间进行聚类，但用比较巧妙的方式将列空间也考虑进去，于是形成了联合簇。Cano等人\cite{cano2007possibilistic}就提出了一种基于奇异值分解（SVD）的方法，给矩阵降维聚类的同时，记录上降维后的特征空间，于是每个降维后的聚类簇都能与其特征空间关联起来形成联合簇。Yan等人\cite{yang2011finding}对矩阵的两个维度分别进行层次聚类，然后用聚类簇的“稳定性”将它们关联起来，找到聚类簇。
 
 \subsection{非度量式的双边聚类算法}
 \label{nonsearch}
 这里将介绍一些并非基于某评价指标搜索的算法，我们根据算法最核心部分与各个领域的关联将它们分为三类，但这种划分并不互斥，各个算法只是归于我们认为的最相关的部分。
 
-\subsubsection*{1. 基于图的算法}
+\subsubsection*{(1) 基于图的算法}
 将图论和聚类联系起来的工作，最早起源于2000年Shi等人\cite{shi2000normalized}的研究，也就是谱聚类的起源文章。基于图的聚类方式将测度空间转换到度量空间，从而巧妙地与图联系起来，进一步将聚类问题转化为图论中的优化问题，使得聚类问题的效率和准确率都大大提高。在双边聚类问题中，Tanay等人\cite{tanay2002discovering}提出了\emph{SAMBA}算法，将矩阵的两个维度转换为图的节点，进而将双边聚类转化为二分图划分问题，巧妙地得到了联合簇。而另一算法\emph{QUBIC}\cite{li2009qubic}则预先将矩阵化为离散值，得出不同行、列之间的相似度后，用谱聚类思想得到聚类簇。
 
-\subsubsection*{2. 基于概率论的算法}
+\subsubsection*{(2)基于概率论的算法}
 概率论始终是各个领域中不可缺少的一个数学分支，生活中也充满了各种概率问题，事实上，所有事件的发生都是有概率的，围绕着概率的计算可以讨论出很多有趣的问题。在双边聚类中，Lazzeroni和Owen\cite{lazzeroni2002plaid}提出了\emph{plaid}算法，其认为一个矩阵为很多联合簇，也就是子矩阵的加权叠加结果，求解联合簇的过程也就是利用约束求解一个“加权拼图”的过程。Sheng等人\cite{sheng2003biclustering}提出了基于吉布斯采样的求解算法，其利用了一个简单的频率模型来刻画双边聚类，从而找到联合簇。
 
-\subsubsection*{3. 基于线性代数的算法}
+\subsubsection*{(3) 基于线性代数的算法}
 双边聚类问题的数据是矩阵，其聚类簇为该矩阵的子矩阵，利用线性代数里的方法，可以将矩阵代表的向量空间转化映射到另一个线性空间，使得在映射后的线性空间中找寻聚类簇变得容易。Kluger等人\cite{kluger2003spectral}提出的谱双边聚类就是典型，虽然数学指导思想不一样，其方法和实质和基于图的算法如出一辙。Carmona-Saez等人\cite{carmona2006biclustering}提出的非平滑非负矩阵分解(\emph{nsNMF})则利用矩阵分解理论，讲原矩阵分解为两个子矩阵，之后分别聚类再关联起来得到聚类簇。
 
 
