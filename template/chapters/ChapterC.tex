@@ -22,7 +22,7 @@
 \textbf{符号说明}：对于矩阵$A=(A_I,A_J)$，$A_I$和$A_J$分别为矩阵$A$的行列集合。$a_{i\cdot}\in{}A_I$代表矩阵的第$i$行，$a_{\cdot{}j}\in{}A_J$代表矩阵的第$j$列。一个联合簇可以表示为矩阵$A$的子矩阵，用$B$表示，$B=A(I_S,J_S)$，其中$I_S$为$A_I$的子集的索引集合，$J_S$为$J_S$的$A_J$的子集的索引集合。$a_{ij}$对应着矩阵$A$第$i$行第$j$列的值。
 
 \begin{dingyi}[行或列的$\epsilon$邻域邻居]
-给一个矩阵$A$和一个常数$\epsilon\in\mathcal{R}$，任意一行$a_{i\cdot}\in{}A_I$的$\epsilon$邻域邻居$N_{\epsilon}^{r}(a_{i\cdot})$可以表示为：
+给一个矩阵$A$和一个常数$\epsilon\in\mathcal{R}$，任意一行\\$a_{i\cdot}\in{}A_I$的$\epsilon$邻域邻居$N_{\epsilon}^{r}(a_{i\cdot})$可以表示为：
 \begin{equation}
 N_{\epsilon}^{r}(a_{i\cdot})=\{a_{p\cdot} \big{|} dist(a_{p\cdot}, a_{i\cdot})\leq\epsilon, p \in I\}
 \label{def:Nbr}
@@ -34,22 +34,22 @@ N_{\epsilon}^{c}(a_{\cdot{}j})=\{a_{\cdot{}q} \big{|} dist(a_{\cdot{}q}, a_{\cdo
 \end{equation}
 \end{dingyi}
 
-如同Kurumoto model\cite{kuramoto2012chemical}和\Sync算法\cite{shao2011synchronization}中的同步交互模型类似的，我们定义双边模型如下：
+如同Kurumoto model\citeup{kuramoto2012chemical}和\Sync算法\citeup{shao2011synchronization}中的同步交互模型类似的，我们定义双边模型如下：
 
 \begin{dingyi}[双边交互聚类模型]
 \label{def:cosync}
 对于矩阵$A$中的元素$a_{ij}$，分别找出其行$a_{i\cdot}$或者列$a_{\cdot{}j}$的$\epsilon$邻域邻居，则邻居行、列中和元素$a_{ij}$交互的值分别为$a_{pj}$和$a_{iq}$，其中$p\in{}N_{\epsilon}^{c}(a_{i\cdot}(t)),q\in{}N_{\epsilon}^{r}(a_{\cdot{}j}(t))$。在$t$时刻的交互模型为：
 \begin{IEEEeqnarray}{rCl}
-a_{ij}(t+1) &=& a_{ij}(t)+\frac{1}{2|N_{\epsilon}^{r}(a_{i\cdot}(t))|}\cdot \hspace{-2mm}\sum_{a_{p\cdot}\in{}N_{\epsilon}^{c}(a_{i\cdot}(t))}\hspace{-5mm}\sin(a_{pj}(t)-a_{ij}(t)) \nonumber
+a_{ij}(t+1) &=& a_{ij}(t)+\frac{w^{r}(j)}{2|N_{\epsilon}^{r}(a_{i\cdot}(t))|}\cdot \hspace{-2mm}\sum_{a_{p\cdot}\in{}N_{\epsilon}^{c}(a_{i\cdot}(t))}\hspace{-5mm}\sin(a_{pj}(t)-a_{ij}(t)) \nonumber
 \\
-&& \negmedspace{}+\frac{1}{2|N_{\epsilon}^{c}(a_{\cdot{}j}(t))|}\cdot \hspace{-2mm}\sum_{a_{\cdot{}q}\in{}N_{\epsilon}^{r}(a_{\cdot{}j}(t))}\hspace{-5mm}\sin (a_{iq}(t)-a_{ij}(t))
+&& \negmedspace{}+\frac{w^{c}(i)}{2|N_{\epsilon}^{c}(a_{\cdot{}j}(t))|}\cdot \hspace{-2mm}\sum_{a_{\cdot{}q}\in{}N_{\epsilon}^{r}(a_{\cdot{}j}(t))}\hspace{-5mm}\sin (a_{iq}(t)-a_{ij}(t))
 \end{IEEEeqnarray}
 \end{dingyi}
 
-其中$\sin(\cdot)$是耦合函数，$a_{ij}(t+1)$是矩阵元素$A_{ij}$在$t+1(t=(0,\ldots,T))$时刻下的取值，这个交互模型中右边两项分别刻画了矩阵的行、列交互。如同我们在前面所描述的，距离越小的行（或列）的交互影响力应该越大，我们定义一个交互权重因子如下：
+其中$sin(\cdot)$是耦合函数，$a_{ij}(t+1)$是矩阵元素$A_{ij}$在$t+1(t=(0,\ldots,T))$时刻下的取值，这个交互模型中右边两项分别刻画了矩阵的行、列交互。如同我们在前面所描述的，距离越小的行（或列）的交互影响力应该越大，我们定义一个交互权重因子如下：
 
 \begin{dingyi}[交互权重因子]
-对于矩阵元素$A_{ij}$的$\epsilon$邻域行邻居$N_{\epsilon}^{r}(a_{\cdot{}j}(t))$，其对$A_{ij}$的交互权重因子定义为：
+对于矩阵元素$A_{ij}$的$\epsilon$邻域行邻居$N_{\epsilon}^{r}(a_{\cdot{}j}(t))$，其对\\$A_{ij}$的交互权重因子定义为：
 \begin{IEEEeqnarray}{rCl}
 w^{r}(j) &=& e^{-\lambda\cdot \sigma_{j}}
 \label{eq:wr}
@@ -80,9 +80,9 @@ a_{ij}(t+1) = a_{ij}(t)+ I_{row}(t) + I_{col}(t)
 \label{eq:model}
 \end{equation}
 
-为了衡量矩阵中的同步的程度，从而决定算法的终结，我们引入程度因子$r$如下：
-\begin{dingyi}[程度因子]
-程度因子$r$在随时间迭代的每一步都会被计算，以决定是否终结加权双边交互算法，其表达式为：
+为了衡量矩阵中的同步的程度，从而决定算法的终结，我们引入同步因子$r$如下：
+\begin{dingyi}[同步因子]
+同步因子$r$在随时间迭代的每一步都会被计算，以决定是否终结加权双边交互算法，其表达式为：
 \begin{IEEEeqnarray}{rCl}
 r &=&\frac{1}{2|I|}\sum_{i=1}^{|I|}\frac{1}{|N_{\epsilon}^{r}(a_{i\cdot})|}\sum_{a_{p\cdot}\in N_{\epsilon}^{r}(a_{i\cdot})}\hspace{-2mm}\mathbf{e}^{-||a_{p\cdot}-a_{i\cdot}||} \nonumber
 \\
@@ -143,7 +143,7 @@ s.t.&\,&\left\{
 
 从图\ref{indicate_matrix}中可以明显地看出，对应于$0.3$的指示矩阵中最大联合簇有两个，尺寸均为$6$，取值为$0.5$的指示矩阵中最大联合簇尺寸为$8$，而取值$1.1$的指示矩阵中最大联合簇尺寸为$4$。
 
-写成指示矩阵的形式后，可以看出这个问题可以类比于为频繁项挖掘问题\cite{agrawal1993mining}：将一行视为一个购物篮数据，一列视为一种商品。通常来说搜索频繁项问题的基础问题有两个：\emph{Apriori}\cite{agrawal1994fast}和\emph{FP-growth}\cite{han2000mining}，在这里我们借用\emph{FP-growth}的数据结构FP-tree。问题\ref{pattern_problem}的具体解决方案如下。
+写成指示矩阵的形式后，可以看出这个问题可以类比于为频繁项挖掘问题\citeup{agrawal1993mining}：将一行视为一个购物篮数据，一列视为一种商品。通常来说搜索频繁项问题的基础问题有两个：\emph{Apriori}\citeup{agrawal1994fast}和\emph{FP-growth}\citeup{han2000mining}，在这里我们借用\emph{FP-growth}的数据结构FP-tree。问题\ref{pattern_problem}的具体解决方案如下。
 
 \vspace{2mm}
 \textbf{最大同值子矩阵搜索算法}：
@@ -206,7 +206,7 @@ s.t.&&\textbf{W}\geq0, \textbf{H}\geq0 \nonumber
 \section{CoSync算法}
 \label{sec:algorithm}
 \vspace{-2mm}
-以式\ref{eq:model}的交互模型为核心，最大子矩阵搜索算法和NMF算法为辅助，\cosync算法全过程可以总结如下几个步骤。完整的CoSync算法伪代码如算法\ref{alg:CoSync}表示。
+以式\ref{eq:model}的交互模型为核心，最大子矩阵搜索算法和NMF算法为辅助，\cosync\\算法全过程可以总结如下几个步骤。完整的CoSync算法伪代码如算法\ref{alg:CoSync}表示。
 \begin{enumerate}
 \item \textbf{初始化}：给定数据矩阵$A$，首先对其进行L2归一化。若$A$的维度比较高，则用第\ref{sec:nmf}节所述的NMF的算法将$A$分解为$W$和$H$矩阵再进行后续求解。
 \item \textbf{双边加权动态交互}：对于矩阵$A$的每一个元素$A_{ij}$，我们先在矩阵$A$上（或者分别在$W$和$H$上）用式\ref{def:Nbr}和\ref{def:Nbc}找出其$\epsilon$邻域邻居$N_{\epsilon}^{r}(a_{i\cdot})$和$N_{\epsilon}^{c}(a_{\cdot{}j})$，那对于该时刻$t$的下一时刻元素$A_{ij}$取值$a_{ij}(t+1)$将会根据式(\ref{eq:model})进行求解。在同步思想的作用下，同一联合簇中的矩阵元素将趋向于取同样的值。
@@ -214,7 +214,7 @@ s.t.&&\textbf{W}\geq0, \textbf{H}\geq0 \nonumber
 \end{enumerate}
 
 {\renewcommand\baselinestretch{1.0}\selectfont  %这条语句是缩小算法的行距，使看起来更美观
-\begin{algorithm}[!t]
+\begin{algorithm}[!p]
 \caption{CoSync}
 \label{alg:CoSync}
 \begin{algorithmic}[1]
@@ -235,7 +235,8 @@ s.t.&&\textbf{W}\geq0, \textbf{H}\geq0 \nonumber
         \FOR{$N_{\epsilon}^{r}(a_{i\cdot})$中每一列 $j \in J$}
             \STATE 用(\ref{eq:wr})式来计算列权重因子$w(j)$;
         \ENDFOR
-        \STATE 用(\ref{eq:row})式来计算每一个$\epsilon$邻域邻居$a_{p\cdot}\in N_{\epsilon}^{r}(a_{i\cdot})$对$a_{i\cdot}$的交互值；
+        \STATE 用(\ref{eq:row})式来计算每一个$\epsilon$邻域邻居%\\
+        $a_{p\cdot}\in N_{\epsilon}^{r}(a_{i\cdot})$对$a_{i\cdot}$的交互值；
     \ENDFOR\\[1ex]
     \STATE // 列交互
     \FOR{对每一个列向量 $a_{\cdot{}j} \in A$}
@@ -247,17 +248,19 @@ s.t.&&\textbf{W}\geq0, \textbf{H}\geq0 \nonumber
         \FOR{$N_{\epsilon}^{c}(a_{\cdot{}j})$中每一行 $i \in I$}
             \STATE 用(\ref{eq:wc})式来计算行权重因子$w(i)$;
         \ENDFOR
-        \STATE 用(\ref{eq:col})式来计算每一个$\epsilon$邻域邻居$a_{\cdot{}q}\in N_{\epsilon}^{c}(a_{\cdot{}j})$对$a_{\cdot{}j}$的交互值；
+        \STATE 用(\ref{eq:col})式来计算每一个$\epsilon$邻域邻居%\\
+        $a_{\cdot{}q}\in N_{\epsilon}^{c}(a_{\cdot{}j})$对$a_{\cdot{}j}$的交互值；
     \ENDFOR
     \STATE 用式(\ref{eq:model})来更新矩阵 $A$;
-    \STATE 用式(\ref{eq:r})来计算程度因子 $r$；
-     \IF{程度因子 $r$ 收敛}
+    \STATE 用式(\ref{eq:r})来计算同步因子 $r$；
+     \IF{同步因子 $r$ 收敛}
         \STATE 循环变量设为$0$;
      \ENDIF
  \ENDWHILE\\[1ex]
 \STATE //寻找联合簇
      \FOR{对于每一个离散值 $\pi_k$}
-         \STATE 用(\ref{sec:pattern_search})节提出的算法搜寻其对应的最大子矩阵$B^{(\pi_k)}$;
+         \STATE 用(\ref{sec:pattern_search})节提出的算法搜寻其对应的%\\
+         最大子矩阵$B^{(\pi_k)}$;
      \ENDFOR
       \STATE 找到所有的联合簇 $B$;\\[1ex]
 \STATE \textbf{输出:} 联合簇矩阵$B$
@@ -275,4 +278,6 @@ s.t.&&\textbf{W}\geq0, \textbf{H}\geq0 \nonumber
 \vspace{-2mm}
 \section{本章小结}
 \vspace{-2mm}
-本章从\cosync解决问题的思想方式方式开始，详述了同步的和动态交互的工作原理（第\ref{sec:start}节）；接着在第\ref{sec:main}节详细说明了\cosync算法核心：双边加权交互聚类模型，给出了模型公式并引入控制同步迭代结束的条件：程度因子；在交互模型收敛后，得到的同步矩阵已有大量的同值子块，需要用第\ref{sec:pattern_search}节给出的最大同值子矩阵搜索算法来发掘这些聚类簇。面对现实情况中的高维数据集，传统的距离度量方式都会失效，第\ref{sec:nmf}节提出的NMF算法来解决这一困扰。最后，在介绍完上述所有模型和算法后，第\ref{sec:algorithm}节总结了\cosync算法的完整工作流程和伪代码，第\ref{sec:algorithm}节给出了算法的时间复杂度分析。
+本章从\cosync解决问题的思想方式方式开始，详述了同步的和动态交互的工作原理（第\ref{sec:start}节）；接着在第\ref{sec:main}节详细说明了\cosync算法核心：双边加权交互聚类模型，给出了模型公式并引入控制同步迭代结束的条件：同步因子；在交互模型收敛后，得到的同步矩阵已有大量的同值子块，需要用第\ref{sec:pattern_search}节给出的最大同值子矩阵搜索算法来发掘这些聚类簇。面对现实情况中的高维数据集，传统的距离度量方式都会失效，第\ref{sec:nmf}节提出的NMF算法来解决这一困扰。最后，在介绍完上述所有模型和算法后，第\ref{sec:algorithm}节总结了\cosync算法的完整工作流程和伪代码，第\ref{sec:algorithm}节给出了算法的时间复杂度分析。
+
+\newpage\mbox{}\thispagestyle{empty}\newpage

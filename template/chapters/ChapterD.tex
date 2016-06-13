@@ -4,7 +4,7 @@
 \label{chapter:experiment}
 \section{实验设计介绍}
 \label{sec:experiment}
-本章中将设计实验对\cosync算法进行检验。首先我们将设计合适的人工数据集，并预先设置评价指标来衡量算法结果的好坏。之后我们将针对现实中的数据集，找寻合适可行的、流行的的数据集进行我们的实验。为了说明\cosync算法的高效和优秀，我们将采用国际上一些有影响力的双边聚类算法进行对比实验。我们选取了可获取程序的几个算法，包括：ITCC\cite{dhillon2003information}，MSSRCC\cite{cho2008coclustering}，Spectral Clustering\cite{kluger2003spectral}，Plaid\cite{lazzeroni2002plaid}。
+本章中将设计实验对\cosync算法进行检验。首先我们将设计合适的人工数据集，并预先设置评价指标来衡量算法结果的好坏。之后我们将针对现实中的数据集，找寻合适可行的、流行的的数据集进行我们的实验。为了说明\cosync算法的高效和优秀，我们将采用国际上一些有影响力的双边聚类算法进行对比实验。我们选取了可获取程序的几个算法，包括：ITCC\citeup{dhillon2003information}，MSSRCC\citeup{cho2008coclustering}，Spectral Clustering\citeup{kluger2003spectral}，Plaid\citeup{lazzeroni2002plaid}。
 
 在\ref{sec:artificial}节中，我们将详述怎么用高斯分布与随机分布构造人工数据集，并给出实验的结果与评估，之后与上述的几个算法进行性能对比；在\ref{sec:gene}节中，我们将用基因表达数据来检测\cosync算法的性能，以及评价在生物信息学中联合簇是否显著的统计结果。由于联合簇在基因数据集上关于基因集没有先验标签，其生物学解释需要用有效性检验的专家知识来评估，不同算法找出的不同簇之间无法直接对比，故在真实数据上我们仅给出\cosync算法的运行结果。
 
@@ -17,7 +17,7 @@
 \item \textbf{数据稠密无空值}：对于大多数双边聚类问题，空值的存在将会使得相似性度量失去意义，故本次实验的数据集将严格遵循无空值这一条件。
 \item \textbf{规模适中}：用于实验的数据集矩阵维度应控制在$(50\times50)\sim(1000\times1000)$的范围内。若矩阵选取过小，则体现不出算法的功能和效率；若过大则不能在短时间内得出结果，并且给结果评价带来困难。
 \item \textbf{维度比例适中}：实验矩阵的行、列数目比例应倾向于$1:1$（方阵）。若比例过于失衡，则维度的差异将给双边交互模型带来较大误差。
-\item \textbf{取值归一化}：由于\cosync的交互模型中存在$\sin(\cdot)$函数，故要求数据矩阵中的值的取值范围为$(-\frac{\pi}{2},\frac{\pi}{2})$。为了说明方便及后续结果的可扩展性，我们按照$L2$归一化的方式将矩阵取值控制在$(0,\frac{\pi}{2})$。
+\item \textbf{取值归一化}：由于\cosync的交互模型中存在$sin(\cdot)$函数，故要求数据矩阵中的值的取值范围为$(-\frac{\pi}{2},\frac{\pi}{2})$。为了说明方便及后续结果的可扩展性，我们按照$L2$归一化的方式将矩阵取值控制在$(0,\frac{\pi}{2})$。
 \item \textbf{易于可视化}：人工数据集的联合簇空间分布应易于可视化，即应该使同一联合簇的元素在原数据矩阵中连续分布，为了方便说明，我们将尽量使联合簇连续分布在原矩阵左上角的子区域内。真实数据集没有这一要求。
 \end{enumerate}
 
@@ -27,7 +27,7 @@
 
 \subsection{评价指标建立}
 \label{subsec:evaluation}
-在信息检索和统计学分类问题中，用来衡量机器学习相关算法结果质量好坏的统计量很多，常见的有互信息(MI)\footnote{\url{https://en.wikipedia.org/wiki/Mutual_information}}、混淆矩阵(Confusion Matrix)\footnote{\url{https://en.wikipedia.org/wiki/Confusion_matrix}}还有精确率与召回率(Precision and Recall)\footnote{\url{https://en.wikipedia.org/wiki/Precision_and_recall}}等。在本文中我们将用精确率与召回率来刻画结果的好坏。
+在信息检索和统计学分类问题中，用来衡量机器学习相关算法结果质量好坏的统计量很多，常见的有互信息（MI）\footnote{\url{https://en.wikipedia.org/wiki/Mutual_information}}、混淆矩阵（Confusion Matrix）\footnote{\url{https://en.wikipedia.org/wiki/Confusion_matrix}}还有精确率与召回率（Precision and Recall）\footnote{\url{https://en.wikipedia.org/wiki/Precision_and_recall}}等。在本文中我们将用精确率与召回率来刻画结果的好坏。
 
 令在本次实验中对于任意一个联合簇矩阵$B$，用\cosync算法找出的子矩阵为$\hat{B}$，关于矩阵$B$精确率和召回率的概念定义如下：
 \begin{description}
@@ -79,11 +79,11 @@ recall = \frac{\{\hat{b}\big{|}\hat{b}\in{}B,\hat{b}\in{}\hat{B}\}}{\{\hat{b}\bi
 可以看出图中两个联合簇的轮廓，需要注意的是，产生这种可见“轮廓”的原因是为了可视化方便而设置的，当矩阵的行、列顺序被打乱后，联合簇将无法被肉眼识别出来，但行、列顺序并不影响\cosync算法的工作。
 
 \vspace{2mm}
-图\ref{fig:simulation}(b)-(d)展示了\cosync算法的工作流程。$T$代表双边交互模型的迭代次数，可见在$T=5$次迭代处，联合簇的轮廓就已经逐渐清晰。往后的迭代中，收敛速度逐渐变慢，直到进行到30次，程度因子的改变量小于一定阈值，停止迭代得到收敛的同步矩阵。原始的两个联合簇都被完整地挖掘出来。图\ref{RC}展示了这一过程中程度因子$r$的收敛过程。
+图\ref{fig:simulation}(b)-(d)展示了\cosync算法的工作流程。$T$代表双边交互模型的迭代次数，可见在$T=5$次迭代处，联合簇的轮廓就已经逐渐清晰。往后的迭代中，收敛速度逐渐变慢，直到进行到30次，同步因子的改变量小于一定阈值，停止迭代得到收敛的同步矩阵。原始的两个联合簇都被完整地挖掘出来。图\ref{RC}展示了这一过程中同步因子$r$的收敛过程。
 \vspace{2mm}
-\pic[htb]{程度因子随时间收敛图}{width=80mm}{RC}
+\pic[htb]{同步因子随时间收敛图}{width=80mm}{RC}
 
-从图中可以看到程度因子将收敛于$1$，且其收敛的速度初始很快，随着迭代的进行越来越缓慢，形成一个平稳的曲线。
+从图中可以看到同步因子将收敛于$1$，且其收敛的速度初始很快，随着迭代的进行越来越缓慢，形成一个平稳的曲线。
 
 受限于篇幅的原因，关于更多\cosync在人工数据集上的结果被置于附录中。从这些实验中我们可以得出结论，\cosync算法对于原始矩阵中嵌入的少量大尺寸联合簇的挖掘结果表现良好，受动态同步的思想驱动，嵌入在数据集中的联合簇都被自然地挖掘了出来，且对参数的上下浮动的敏感性较低，具有不错的鲁棒性。但是若在数据集中嵌入的联合簇的分布复杂，且尺寸小数量多的情况下，则受限于相似性度量难以有效发挥作用，不能很好地同步在一起。
 
@@ -91,7 +91,7 @@ recall = \frac{\{\hat{b}\big{|}\hat{b}\in{}B,\hat{b}\in{}\hat{B}\}}{\{\hat{b}\bi
 \label{subsec:compare}
 为了证明我们的算法相对于与其他算法的优势，说明\cosync算法能挖掘出任意排列方式的联合簇，我们设计了两个代表性的$(1000\times1000)$的中大型数据矩阵。其中一个矩阵中的联合簇将以棋盘（checkboard）的方式分布，如图\ref{fig:yiqi}(a)所示；而另一个矩阵中的联合簇位置分布任意，如图\ref{fig:yiqi}(c)所示。图中矩阵里嵌入的颜色深浅不一的子矩阵从均值不一的高斯分布$N(\mu,\sigma)$中采样得到。为了消除行、列的排序对算法性能的影响，图\ref{fig:yiqi}(b)和(d)是棋盘分布矩阵和随机分布矩阵行列顺序打散后的结果。所有的实验都将在乱序上的矩阵上进行。
 
-接着我们将分别在这两个数据矩阵上，用\cosync，ITCC，MSSRCC，Spectral Clustering，Plaid进行测试。国际上很多主流算法由于自身局限性，对数据矩阵有较强的假设：联合簇的分布为棋盘式的，比如本次进行试验的ITCC，MSSRCC和Spectral CLustering算法。在这样的假设下，这些算法将分别对行、列空间进行聚类，最后把同一个簇的行列集合放到一起形成子矩阵。此外除\cosync外的四种算法都需要指定双边聚类的行、列各自划分的数目，相当于一个先验参数。下面是两个数据集分别的实验结果：
+接着我们将分别在这两个数据矩阵上，用\cosync，ITCC，MSSRCC，Spectral Clustering，Plaid进行测试。国际上很多主流算法由于自身局限性，对数据矩阵有较强的假设：联合簇的分布为棋盘式的，比如本次进行试验的ITCC，MSSRCC和\\Spectral CLustering算法。在这样的假设下，这些算法将分别对行、列空间进行聚类，最后把同一个簇的行列集合放到一起形成子矩阵。此外除\cosync外的四种算法都需要指定双边聚类的行、列各自划分的数目，相当于一个先验参数。下面是两个数据集分别的实验结果：
 
 \vspace{4mm}
 \tabcolsep=2pt
@@ -108,6 +108,26 @@ recall = \frac{\{\hat{b}\big{|}\hat{b}\in{}B,\hat{b}\in{}\hat{B}\}}{\{\hat{b}\bi
 \label{fig:yiqi}
 \end{figure*}
 
+\vspace{3mm}
+\textbf{棋盘分布下的算法比较}：
+在本实验中，首先针对ITCC，MSSRCC和Spectral CLustering算法的特性，对棋盘式分布的矩阵进行测试。实验矩阵尺寸为$(1000\times1000)$，嵌入了6个从均值不同的高斯分布$N(\mu,\sigma)$中抽样的联合簇，其可视化图行列打散的的矩阵如图\ref{fig:yiqi}(a)-(b)所示。由于数据集的分布为棋盘分布，故行、列的划分数目很好确定，分别为$4$与$3$。
+
+在5种算法完成测试后，各自得到输出的代表联合簇的行、列集合。我们对它们进行排序整理，重新规划为易于观察的矩阵，其可视化结果如图\ref{fig:yiqi_r}(b)-(f)所示。
+
+图中红色方框为结果中识别出的聚类簇。可见只有\cosync和Plaid算法能够识别分散在矩阵中的聚类簇，其他三种对聚类簇的识别都是基于全局划分的。在图\ref{fig:yiqi_r}(b)中，可见\cosync算法分毫不差地挖掘出嵌入原始矩阵的6个联合簇，做到了识别度$100\%$；而在图\ref{fig:yiqi_r}(f)中，Plaid模型识别出了6个聚类簇中的4个，识别度为$66.6\%$。ITCC、MSSRCC与Spectral Clustering算法用划分的方式将原矩阵划分为$4\times3=12$块，图\ref{fig:yiqi_r}(c),(e)中ITCC和Spectral Clustering的12块子矩阵中成功地包括了嵌入的6块联合簇，而图\ref{fig:yiqi_r}(d)中的MSSRCC算法的划分没有成功地圈出联合簇。
+
+总体来看，在这个实验集上，\cosync表现出了良好的特性，甚至胜出了专为棋盘式数据设计的ITCC，MSSRCC和Spectral Clustering算法。
+
+\vspace{3mm}
+\textbf{随机分布下的算法比较}：
+在现实数据中，联合簇的嵌入不可能按照棋盘式方式规律分布，其分布是无规律而杂乱的。我们在本次实验中模拟了这种情况，将4个大小、尺寸不一致的联合簇随机嵌入$(1000\times1000)$的矩阵中，注意联合簇间不能互相遮挡重叠。其可视化图行列打散的的矩阵如图\ref{fig:yiqi}(c)-(d)所示。
+
+同样地，5种算法在该数据集上运行完毕后，我们对各自输出的结果矩阵行列顺序整理重排，其可视化结果如图\ref{fig:yiqi_r}(h)-(l)所示。从结果中可以看出，\cosync算法依然准确地识别出了4个嵌入的联合簇，而Plaid算法仅识别出了1个联合簇。值得注意的是，在图\ref{fig:yiqi_r}(i)-(k)中的ITCC，MSSRCC和Spectral Clustering三种基于划分的方法此时已经失去效果。ITCC和Spectral Clustering仅划分出了一个联合簇。但由于受于方法本身的限制，它的划分不能将其余联合簇划分出来。MSSRCC则没有划分到正确的聚类簇。
+
+在这次的比较中，\cosync发挥了其优势：能处理以任何分布方式的聚类簇，且发掘效果显著，胜出了其余几种代表性方法。
+
+\subsection{人工数据集测试小结}
+我们在本节的人工数据集测试中，首先用比较简单的$(100\times100)$数据集证明了\cosync算法的可行性，并作出数据集在同步过程中的变化图。接下来，在联合簇以棋盘方式和任意方式分布中大规模的$(1000\times1000)$数据集上，我们将\cosync算法和国际上比较有代表性的双边聚类算法ITCC，MSSRCC，Spectral Clustering和\\Plaid算法进行比较。两个的比较的结果中，\cosync都成功地识别出了矩阵中嵌入的所有联合簇，而其他算法都没有做到这一程度，这充分显现了\cosync算法在这一类数据集上的优势。总体来看，本次实验展示了\cosync算法的高效性和能抓住数据集本质结构的特性。
 
 \tabcolsep=1pt
 \begin{figure*}[!p]
@@ -136,26 +156,7 @@ recall = \frac{\{\hat{b}\big{|}\hat{b}\in{}B,\hat{b}\in{}\hat{B}\}}{\{\hat{b}\bi
 \end{figure*}
 % \pagenumbering{}
 
-\vspace{3mm}
-\textbf{棋盘分布下的算法比较}：
-在本实验中，首先针对ITCC，MSSRCC和Spectral CLustering算法的特性，对棋盘式分布的矩阵进行测试。实验矩阵尺寸为$(1000\times1000)$，嵌入了6个从均值不同的高斯分布$N(\mu,\sigma)$中抽样的联合簇，其可视化图行列打散的的矩阵如图\ref{fig:yiqi}(a)-(b)所示。由于数据集的分布为棋盘分布，故行、列的划分数目很好确定，分别为$4$与$3$。
 
-在5种算法完成测试后，各自得到输出的代表联合簇的行、列集合。我们对它们进行排序整理，重新规划为易于观察的矩阵，其可视化结果如图\ref{fig:yiqi_r}(b)-(f)所示。
-
-图中红色方框为结果中识别出的聚类簇。可见只有\cosync和Plaid算法能够识别分散在矩阵中的聚类簇，其他三种对聚类簇的识别都是基于全局划分的。在图\ref{fig:yiqi_r}(b)中，可见\cosync算法分毫不差地挖掘出嵌入原始矩阵的6个联合簇，做到了识别度$100\%$；而在图\ref{fig:yiqi_r}(f)中，Plaid模型识别出了6个聚类簇中的4个，识别度为$66.6\%$。ITCC、MSSRCC与Spectral Clustering算法用划分的方式将原矩阵划分为$4\times3=12$块，图\ref{fig:yiqi_r}(c),(e)中ITCC和Spectral Clustering的12块子矩阵中成功地包括了嵌入的6块联合簇，而图\ref{fig:yiqi_r}(d)中的MSSRCC算法的划分没有成功地圈出联合簇。
-
-总体来看，在这个实验集上，\cosync表现出了良好的特性，甚至胜出了专为棋盘式数据设计的ITCC，MSSRCC和Spectral Clustering算法。
-
-\vspace{3mm}
-\textbf{随机分布下的算法比较}：
-在现实数据中，联合簇的嵌入不可能按照棋盘式方式规律分布，其分布是无规律而杂乱的。我们在本次实验中模拟了这种情况，将4个大小、尺寸不一致的联合簇随机嵌入$(1000\times1000)$的矩阵中，注意联合簇间不能互相遮挡重叠。其可视化图行列打散的的矩阵如图\ref{fig:yiqi}(c)-(d)所示。
-
-同样地，5种算法在该数据集上运行完毕后，我们对各自输出的结果矩阵行列顺序整理重排，其可视化结果如图\ref{fig:yiqi_r}(h)-(l)所示。从结果中可以看出，\cosync算法依然准确地识别出了4个嵌入的联合簇，而Plaid算法仅识别出了1个联合簇。值得注意的是，在图\ref{fig:yiqi_r}(i)-(k)中的ITCC，MSSRCC和Spectral Clustering三种基于划分的方法此时已经失去效果。ITCC和Spectral Clustering仅划分出了一个联合簇。但由于受于方法本身的限制，它的划分不能将其余联合簇划分出来。MSSRCC则没有划分到正确的聚类簇。
-
-在这次的比较中，\cosync发挥了其优势：能处理以任何分布方式的聚类簇，且发掘效果显著，胜出了其余几种代表性方法。
-
-\subsection{人工数据集测试小结}
-我们在本节的人工数据集测试中，首先用比较简单的$(100\times100)$数据集证明了\cosync算法的可行性，并作出数据集在同步过程中的变化图。接下来，在联合簇以棋盘方式和任意方式分布中大规模的$(1000\times1000)$数据集上，我们将\cosync算法和国际上比较有代表性的双边聚类算法ITCC，MSSRCC，Spectral Clustering和Plaid算法进行比较。两个的比较的结果中，\cosync都成功地识别出了矩阵中嵌入的所有联合簇，而其他算法都没有做到这一程度，这充分显现了\cosync算法在这一类数据集上的优势。总体来看，本次实验展示了\cosync算法的高效性和能抓住数据集本质结构的特性。
 
 \section{基因表达数据上的算法实现及评估}
 % \pagenumbering{arabic}
@@ -176,13 +177,13 @@ DNA微阵列数据是一种观测基因在特定样本上表达程度的数据\f
 \begin{table}[!htb]\renewcommand{\arraystretch}{1.3}
 \center \caption{四个基因数据集的统计信息表}
 \small
-\begin{tabular}{c|c|c|c|c}
+\begin{tabular}{ccccc}
 \hlinew{1pt}
 \textbf{数据集}& \#\textbf{基因数目}& \#\textbf{样本数目} & \textbf{样本类别名称}&  \textbf{样本分布}\\
 \hlinew{1pt}
-Colon  &  1096 & 62 &Normal/Tumor& 20/42  \\ \hline
-Leukemia   & 3571 & 72 &ALL/AML & 47/25    \\ \hline
-Lung    & 2401 & 181 &ADCA/MPM& 150/31 \\ \hline
+Colon  &  1096 & 62 &Normal/Tumor& 20/42  \\
+Leukemia   & 3571 & 72 &ALL/AML & 47/25    \\
+Lung    & 2401 & 181 &ADCA/MPM& 150/31 \\
 MLL & 2474 & 72  & ALL/AML/MLL&24/28/20 \\ \hlinew{1pt}
 \end{tabular}
 \label{tab:dataset}
@@ -216,7 +217,7 @@ MLL& 23& 0.99 & 0.67 &4&0.88&0.88&3 &0.83 &3 &0.93 &3 &0.64 \\ \hlinew{1pt}
 
 可以看到ITCC，MSSRCC和Spectral Clustering算法的由于基于划分，故其样本空间划分数目已经提前被指定好，均为数据中样本类别的真实数目。在自动找寻联合簇的算法\cosync和Plaid当中，Plaid找出的簇仅为$2\sim4$个，而\cosync算法在Colon数据集中找出11个联合簇，而其他三个数据集上，都发掘出了$20$个以上的联合簇。
 
-关于样本的评价标准，\cosync在四个数据集上准确率都达到了令人满意的$95\%$以上，而召回率达到了$66\%$以上。这说明了\cosync算法找出的联合簇都能代表真实数据中的数据结构。而召回率在这重要性不是很高，因为这仅代表着算法找出的样本没有覆盖整个样本维空间。从准确率上来看，其他算法的性能都没有超过\cosync，而从召回率的角度看，基于划分的方法明显超出\cosync算法，这是合理的结果。
+关于样本的评价标准，\cosync在四个数据集上准确率都达到了令人满意的$95\%$\\以上，而召回率达到了$66\%$以上。这说明了\cosync算法找出的联合簇都能代表真实数据中的数据结构。而召回率在这重要性不是很高，因为这仅代表着算法找出的样本没有覆盖整个样本维空间。从准确率上来看，其他算法的性能都没有超过\cosync，而从召回率的角度看，基于划分的方法明显超出\cosync算法，这是合理的结果。
 
 其次，我们还能从图中看出，数据集Lung在五个算法下都表现出了优良的性能，而Colon数据集在5个算法下的性能都不如其他数据集。这说明数据集本身的结构会影响所有的算法效能。
 
@@ -291,7 +292,7 @@ ITCC，MSSRCC和Spectral Clustering算法这样基于划分的方法在没有标
 p-value = P(\text{拒绝接受}H_0\big{|}H_0\text{为真})
 \end{equation*}
 
-p-value值越小，则说明拒绝$H_0$的概率越小，也就是假设$H_0$越可信。当p-value取$0$时候，假设$H_0$与观测相比毫无差别。而当p-value值打过一定程度时候，结果就不可信了。对此人们通常设置一个阈值$\alpha$，当$p-value\ge\alpha$时，便拒绝假设$H_0$。
+p-value值越小，则说明拒绝$H_0$的概率越小，也就是假设$H_0$越可信。当p-value\\取$0$时候，假设$H_0$与观测相比毫无差别。而当p-value值打过一定程度时候，结果就不可信了。对此人们通常设置一个阈值$\alpha$，当$p-value\ge\alpha$时，便拒绝假设$H_0$。
 
 \vspace{2mm}
 在基因库丰富度分析中，令真实的一个基因集合为$\mathcal{G}$，而预测出来的基因集合为$\hat{\mathcal{G}}$，对应假设$H_0$的命题为：
@@ -308,7 +309,14 @@ H_0 = \{\hat{\mathcal{G}}\subseteq{}\mathcal{G}\}
 \item ~~同一算法中，同一聚类簇中的基因集对基因本体中不同基因集的p-value值之间不能相互比较。
 \end{itemize}
 
-由于\cosync与其他算法找出聚类簇的基因集显著结果无法比较，故本文中我们仅对我们的\cosync算法进行基因集丰富度分析。表
+由于\cosync与其他算法找出聚类簇的基因集显著结果无法比较，故本文中我们仅对我们的\cosync算法进行基因集丰富度分析。事实上，现在已有用于基因库丰富度分析的公开网站，并且已经很成熟和快速，本次我们将使用基因本体库最齐全的Gene Ontology Consortium网站(\url{http://geneontology.org/})来进行丰富度分析。表\ref{tab:annotations}列出了\cosync联合簇找出的联合簇基因集进行丰富度分析的结果，阈值$\alpha$取为$0.05$。受于篇幅的限制，此处仅列出每个数据集中前3大的联合簇的分析结果。
+
+表中CC和BP以及后面跟的专业名词分别代表细胞组件与生物过程中特定的物质组成部分或者生物学过程。可以看出每个聚类簇在与基因本体库中的基因集进行匹配时，p-value$\le0.05$的基因集最少在Colon数据集中能匹配到65个，最多在Leukemia数据集中能匹配539个。找出其各自p-value最小的4个进行进一步剖析，可以看到它们的p-value都小于$1\times10^{-3}$级别。有理由相信这部分基因就是对应细胞组件或者生物过程中某特定过程的组成基因的子集。图\ref{cocluster}中，我们对每个数据集中大尺寸联合簇进行了可视化，由于篇幅原因，对于样本的每个类别我们只取一个聚类簇。
+
+\vspace{2mm}
+\pic[!htb]{基因表达数据联合簇可视化图}{width=120mm}{cocluster}
+
+从上面简单的评估中，我们可以看出\cosync能够找到一些高质量的聚类簇。关于对聚类基因集的更进一步权威的生物学验证，已经超出本实验的范围，本文不再展开。
 
 \tabcolsep=1pt
 \begin{table*}[!htb]\renewcommand{\arraystretch}{0.9}
@@ -395,5 +403,14 @@ H_0 = \{\hat{\mathcal{G}}\subseteq{}\mathcal{G}\}
 \vspace{-2mm}
 \end{table*}
 
-\section{本章小结}
+\subsection{基因表达数据集上测试小结}
+在本节中，我们说明了选用基因数据集的原因，说明了评价聚类得到的基因集的方法与标准，即基因集丰富度分析和统计假设检验p-value。我们在给定的四个知名基因表达数据集进行测试。在测试得到的聚类簇中，我们可以将样本维度的集合与已知类标签对比，结果显示其准确率和召回率都非常高，优于ITCC，MSSRCC，Spectral CLustering和Plaid算法。在基因集的评测上，我们仅对\cosync算法的聚类簇进行评析，能看到每个聚类簇的基因集都能高质量地匹配大量基因本体库中的特定基因集。这说明\cosync在基因数据集上工作的可行性与高效性。
 
+\section{本章小结}
+在本章中，我们设计了一系列实验对\cosync算法进行验证。在第\ref{sec:experiment}节中，我们给出了实验集的选取和处理的五条原则，并给出了评价结果好坏的指标：准确率和召回率。
+在\ref{sec:artificial}节中我们首先用一个小规模实验集合对\cosync的工作流程作了说明，接着在棋盘分布与随机分布的两个中规模数据集上将五种算法进行了比较，说明了\cosync算法的优秀。
+最后在\ref{sec:gene}节中我们对基因表达数据进行测试，在样本维度上，\cosync的运行结果仍然好于其他四种算法，而在基因维度上，\cosync也能高质量匹配大量基因本体库中的基因集，说明了\cosync在基因数据集上的高效性。
+
+总结来看，无论是在人工数据集还是现实中的基因数据集上，\cosync的结果表现都非常出色，且优于一些国际上双边聚类代表性算法。实验的成功说明了\cosync算法中同步思想的正确与高效。
+
+\newpage\mbox{}\thispagestyle{empty}\newpage
